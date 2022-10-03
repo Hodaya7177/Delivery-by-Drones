@@ -1,2 +1,2 @@
-# .NET project: Delivery-by-Drones
+# Drone delivery service using .NET
 building a drone deliveries system based on the three layers model; database, business logic and UI. Using with WPF, multithreading, xml and more
