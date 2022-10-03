@@ -1,0 +1,151 @@
+﻿<Window x:Class="PL.ParcelWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="ParcelWindow" Height="450" Width="800">
+
+
+    <Window.Resources>
+        <Style x:Key="lblEnter" TargetType="Label">
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Width" Value="200" />
+            <Setter Property="Grid.Column" Value="1" />
+        </Style>
+
+        <Style x:Key="txtboxEnter" TargetType="TextBox">
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Width" Value="200" />
+            <Setter Property="Grid.Column" Value="2" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+
+        <Style x:Key="comboEnter" TargetType="ComboBox">
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Width" Value="200" />
+            <Setter Property="Grid.Column" Value="2" />
+            <Setter Property="Background" Value="White" />
+        </Style>
+
+        <Style x:Key="btnAddPage" TargetType="Button">
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Height" Value="28" />
+            <Setter Property="Width" Value="115" />
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+
+        <Style x:Key="txtboxDetails" TargetType="TextBox">
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Width" Value="130" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+
+        <Style x:Key="lblDetails" TargetType="Label" BasedOn="{StaticResource lblEnter}">
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Width" Value="120" />
+            <Setter Property="Height" Value="30" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+
+        <Grid x:Name="DesignGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+                    <Rectangle Fill="AliceBlue" Grid.Column="0"/>
+        <Ellipse Fill="SandyBrown" Grid.Column="1" Margin="574,217,-109,-105" Opacity="0.7"/>
+        </Grid>
+
+        <Grid  x:Name="AddParcelGrid" d:IsHidden="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.6*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            
+            <Label Content="Insert details of parcel you want to add:" FontWeight="Bold" Foreground="Gray" FontSize="20" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top" Height="48" Width="472" Grid.ColumnSpan="3"/>
+            <Label x:Name="lblEnterSenderId" Content="Enter Id of Sender:" Style="{StaticResource lblEnter}" Grid.Row="1"/>
+            <TextBox x:Name="txtSenderId" Style="{StaticResource txtboxEnter}" MaxLength="9" Grid.Row="1"/>
+            <Label x:Name="lblEnterTargerId" Content="Enter Id of Receiver:"  Style="{StaticResource lblEnter}" Grid.Row="2"/>
+            <TextBox x:Name="txtTargetId" Style="{StaticResource txtboxEnter}" MaxLength="9" Grid.Row="2"/>
+            <Label x:Name="lblChooseWeight" Content="Choose Weight of Parcel:" Style="{StaticResource lblEnter}" Grid.Row="3"/>
+            <ComboBox x:Name="comboWeightSelcetor" Style="{StaticResource comboEnter}" Grid.Row="3" SelectionChanged="comboWeightSelcetor_SelectionChanged"/>
+            <Label x:Name="lblChoosePriority" Content="Choose Priority of Parcel:" Style="{StaticResource lblEnter}" Grid.Row="4"/>
+            <ComboBox x:Name="comboPrioritySelcetor" Style="{StaticResource comboEnter}" Grid.Row="4" Background="White" SelectionChanged="comboPrioritySelcetor_SelectionChanged" />
+
+
+                <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Right" Style="{StaticResource btnAddPage}" Grid.Row="5" Grid.Column="1" Click="btnAdd_Click" />
+                <Button x:Name="btnCancel" Content="Cancel" Style="{StaticResource btnAddPage}" Grid.Column="1" Grid.Row="5" Click="btnCancel_Click"/>
+        </Grid>
+
+
+        <Grid x:Name="ViewGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.7*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.7*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.3*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="1.2*"/>
+            </Grid.RowDefinitions>
+
+            <Label x:Name="lblIdData" Content="Parcel ID:" Style="{StaticResource lblDetails}" Grid.Column="1" Grid.Row="1" />
+            <TextBox x:Name="txtIdData" Text="{Binding Id, Mode=OneWay}" Style="{StaticResource txtboxDetails}" IsReadOnly="True" Grid.Column="2" Grid.Row="1"/>
+            <Label x:Name="lblSenderData" Content="Id of Sender:" Style="{StaticResource lblDetails}" Grid.Row="2" Grid.Column="1" />
+            <TextBox x:Name="txtSenderData" Style="{StaticResource txtboxDetails}" IsReadOnly="True" BorderBrush="DimGray" BorderThickness="2" Cursor="Hand" Grid.Row="2" Grid.Column="2" MouseDoubleClick="DetailsOfSender_MouseDoubleClick"/>
+            <Label x:Name="lblTargetData" Content="Id of Receiver:" Style="{StaticResource lblDetails}" Grid.Row="3" Grid.Column="1" />
+            <TextBox x:Name="txtTargetData" Style="{StaticResource txtboxDetails}" IsReadOnly="True" Grid.Column="2" Grid.Row="3" BorderBrush="DimGray" BorderThickness="2" Cursor="Hand" MouseDoubleClick="DetailsOfTarget_MouseDoubleClick"/>
+            <Label x:Name="lblWeightData" Content="Weight:" Style="{StaticResource lblDetails}" Grid.Row="4" Grid.Column="1" />
+            <TextBox x:Name="txtWeightData" Text="{Binding Weight , Mode=OneWay}" Style="{StaticResource txtboxDetails}" IsReadOnly="True" Grid.Column="2" Grid.Row="4"/>
+            <Label x:Name="lblPriorityData" Content="Priority:" Style="{StaticResource lblDetails}" Grid.Row="5" Grid.Column="1"/>
+            <TextBox x:Name="txtPriorityData" Text="{Binding Priority, Mode=OneWay}" Style="{StaticResource txtboxDetails}" IsReadOnly="True" Grid.Column="2" Grid.Row="5"/>
+            <Label x:Name="lblRequestedDateData" Content="Requested Date:" Style="{StaticResource lblDetails}" Grid.Row="2" Grid.Column="3"/>
+            <TextBox x:Name="txtRequestedDateData" Text="{Binding Requested, Mode=OneWay}" Style="{StaticResource txtboxDetails}" TextAlignment="Center" IsReadOnly="True" Grid.Column="4" Grid.Row="2"/>
+            <Label x:Name="lblScheduledDateData" Content="Scheduled Date:" Style="{StaticResource lblDetails}" Grid.Row="3" Grid.Column="3"/>
+            <TextBox x:Name="txtScheduledDateData" Text="{Binding Scheduled, Mode=OneWay}" Style="{StaticResource txtboxDetails}" TextAlignment="Center" IsReadOnly="True" Grid.Column="4" Grid.Row="3"/>
+            <Label x:Name="lblPickedUpDateData" Content="PickedUp Date:" Style="{StaticResource lblDetails}" Grid.Row="4" Grid.Column="3"/>
+            <TextBox x:Name="txtPickedUpDateData" Text="{Binding PickedUp, Mode=OneWay}" Style="{StaticResource txtboxDetails}" IsReadOnly="True" TextAlignment="Center" Grid.Column="4" Grid.Row="4"/>
+            <Label x:Name="lblDeliveredDateData" Content="Delivered Date:" Style="{StaticResource lblDetails}" Grid.Row="5" Grid.Column="3"/>
+            <TextBox x:Name="txtDeliveredDateData" Text="{Binding Delivered, Mode=OneWay}" Style="{StaticResource txtboxDetails}" IsReadOnly="True" TextAlignment="Center" Grid.Column="4" Grid.Row="5"/>
+            <Label x:Name="lblDroneInParcelData" Content="Id of Drone:" Style="{StaticResource lblDetails}" Grid.Column="3" Grid.Row="1"/>
+            <TextBox x:Name="txtDroneInParcel" Grid.Column="4" IsReadOnly="true" Style="{StaticResource txtboxDetails}" BorderBrush="DimGray" BorderThickness="2" MouseDoubleClick="DetailsOfDrone_MouseDoubleClick" Cursor="Hand" Grid.Row="1"/>
+            <Button x:Name="btnClose" Content="Close" Style="{StaticResource btnAddPage}" VerticalAlignment="Top" Grid.Column="1" Click="btnClose_Click" Grid.Row="7" />
+            <Button x:Name="btnDelete" Content="Delete" Style="{StaticResource btnAddPage}" VerticalAlignment="Top" Grid.Column="2" Grid.Row="7" Click="btnDelete_Click" />
+            <Label x:Name="lblDoubleClick" Content="Double click for more details" FontSize="9" Foreground="DimGray" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" VerticalAlignment="center" />
+            <Label Content="Double click for more details" FontSize="9" Foreground="DimGray" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1" VerticalAlignment="center" />
+            <Label Content="Double click for more details" FontSize="9" Foreground="DimGray" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="1" VerticalAlignment="center" />
+        </Grid>
+
+    </Grid>
+</Window>

@@ -1,0 +1,97 @@
+﻿<Window x:Class="PL.DroneListWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="DroneListWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Name="UpGrid" Height="54" Grid.Row="0" Width="auto" VerticalAlignment="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions >
+
+            <ComboBox x:Name="comboStatusSelector" Text="Filter weight" ToolTip="Click to show list of drones by status" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsEditable="True" IsReadOnly="True"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="comboCombineStatusAndWeight_SelectionChanged" Width="140" Margin="0,0,40,0" />
+            <ComboBox x:Name="comboMaxWeightSelector" Text="Filter status" ToolTip="Click to show list of drones by max weight" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsEditable="True" IsReadOnly="True" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="comboCombineStatusAndWeight_SelectionChanged" Width="140" Grid.ColumnSpan="2" Margin="0,0,76,0"/>
+
+
+            <Button x:Name="btnClear" Content="No Filters" BorderBrush="White" Background="White" TextElement.Foreground="CornflowerBlue" HorizontalAlignment="Left" Margin="37,7,0,0" HorizontalContentAlignment="Left" VerticalAlignment="Top" Height="20" Width="106" Click="btnClear_Click" RenderTransformOrigin="-0.107,0.504"/>
+            <CheckBox x:Name="cboxStatusSort" IsChecked="False" Content="sort by status" Grid.Column="3" HorizontalAlignment="Left" Margin="82,35,0,0" VerticalAlignment="Top"  Unchecked="cboxStatusSort_Unchecked" Checked="cboxStatusSort_Checked"/>
+        </Grid>
+
+        <Grid x:Name="MiddleGrid" Grid.Row="1">
+
+
+            <ListView x:Name="DronesListView" Margin="8,10,8,30" MouseDoubleClick="DronesListView_MouseDoubleClick">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Drone Status" Width="100" DisplayMemberBinding="{Binding DroneStatus}" />
+                        <GridViewColumn Header="ID" Width="100" DisplayMemberBinding="{Binding Id}" />
+                        <GridViewColumn Header="Model" Width="100" DisplayMemberBinding="{Binding Model}" />
+                        <GridViewColumn Header="Max Weight" Width="100" DisplayMemberBinding="{Binding MaxWeight}" />
+                        <GridViewColumn Header="Battery" Width="80" DisplayMemberBinding="{Binding Battery,StringFormat = N0}" />
+                        <GridViewColumn Header="Location" Width="100" DisplayMemberBinding="{Binding Location}" />
+                        <GridViewColumn Header="Serial Number of Parcel" Width="140" DisplayMemberBinding="{Binding ParcelInDeliveryId}" />
+                        <GridViewColumn Header="Is active" Width="50" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding isActive}" IsEnabled="False" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+
+                <ListView.GroupStyle>
+                    <GroupStyle>
+
+                        <GroupStyle.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </GroupStyle.HeaderTemplate>
+
+                        <GroupStyle.ContainerStyle>
+                            <Style TargetType="{x:Type GroupItem}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <Expander IsExpanded="False">
+                                                <Expander.Header>
+                                                    <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="Gray" FontSize="22" VerticalAlignment="Bottom" />
+                                                </Expander.Header>
+                                                <ItemsPresenter />
+                                            </Expander>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </GroupStyle.ContainerStyle>
+                    </GroupStyle>
+                </ListView.GroupStyle>
+            </ListView>
+        </Grid>
+
+        <Grid x:Name="DownGrid" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnAddDrone" Content="Add Drone" HorizontalAlignment="Center" ToolTip="Add drone" VerticalAlignment="Top" Height="30" Width="116" Click="btnAddDrone_Click" Grid.Column="1"/>
+            <Button x:Name="btnBack" Content="Close" HorizontalAlignment="Center" ToolTip="Back" VerticalAlignment="Top" Height="30" Width="116" Click="btnBack_Click"/>
+
+        </Grid>
+    </Grid>
+</Window>

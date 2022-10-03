@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Config>
+	<electricityRates>   
+		<WhenAvailable>0.1</WhenAvailable>
+		<WhenLightWeight>1</WhenLightWeight> 
+		<WhenMediumWeight>2</WhenMediumWeight>
+		<WhenHeavyWeight>4</WhenHeavyWeight> 
+		<ChargingRate>5</ChargingRate>
+	</electricityRates>
+  <ParcelId>10000</ParcelId>
+</Config>

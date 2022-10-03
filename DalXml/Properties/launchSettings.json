@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "DalXML": {
+      "commandName": "Project",
+      "workingDirectory": "$(SolutionDir)"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon />
+    <StartupObject />
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="images\NewFolder\**" />
+    <EmbeddedResource Remove="images\NewFolder\**" />
+    <None Remove="images\NewFolder\**" />
+    <Page Remove="images\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="images\Drone1.jpg" />
+    <None Remove="images\manager.png" />
+    <None Remove="images\user.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BL\BL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="images\Drone1.jpg" />
+    <Resource Include="images\manager.png" />
+    <Resource Include="images\user.png" />
+  </ItemGroup>
+
+</Project>

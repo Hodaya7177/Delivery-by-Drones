@@ -1,0 +1,193 @@
+﻿<Window x:Class="PL.CustomerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="CustomerWindow" Height="450" Width="800">
+
+    <Window.Resources>
+        <Style x:Key="lblEnter" TargetType="Label">
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Width" Value="200" />
+            <Setter Property="Grid.Column" Value="1" />
+        </Style>
+
+        <Style x:Key="txtboxEnter" TargetType="TextBox">
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Width" Value="200" />
+            <Setter Property="Grid.Column" Value="2" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+
+        <Style x:Key="btnAddPage" TargetType="Button">
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Height" Value="28" />
+            <Setter Property="Width" Value="115" />
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+
+        <Style x:Key="txtboxDetails" TargetType="TextBox">
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Width" Value="120" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+
+        <Style x:Key="lblDetails" TargetType="Label" BasedOn="{StaticResource lblEnter}">
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Width" Value="100" />
+        </Style>
+
+    </Window.Resources>
+    <Grid>
+
+        <Grid x:Name="DesignGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3.5*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Fill="AliceBlue" Grid.Column ="0"/>
+            <Ellipse Fill="SandyBrown" Margin="264,166,-141,-54" Opacity="0.7" Grid.Column="1"/>
+        </Grid>
+
+        <Grid  x:Name="AddCustomerGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="85*"/>
+                <RowDefinition Height="53*"/>
+                <RowDefinition Height="53*"/>
+                <RowDefinition Height="52.932"/>
+                <RowDefinition Height="85*"/>
+                <RowDefinition Height="106*"/>
+            </Grid.RowDefinitions>
+            <Label x:Name="lblEnterId" Content="Enter customer ID" Style="{StaticResource lblEnter}" Grid.Row="1"/>
+            <TextBox x:Name="txtCustomerId" Style="{StaticResource txtboxEnter}" MaxLength="9" Grid.Row="1" PreviewKeyDown = "TextBox_OnlyNumbers_PreviewKeyDown" />
+            <Label x:Name="lblEnterName" Content="Enter Name:" Style="{StaticResource lblEnter}" Grid.Row="2"/>
+            <TextBox x:Name="txtCustomerName" Style="{StaticResource txtboxEnter}" Grid.Row="2"  />
+            <Label x:Name="lblEnterPhone" Content="Enter Phone Number:" Style="{StaticResource lblEnter}" Grid.Row="3"/>
+            <TextBox x:Name="txtCustomerPhone" Style="{StaticResource txtboxEnter}" Grid.Row="3" />
+            <Label x:Name="lblEnterLocation" Content="Enter Location:" Style="{StaticResource lblEnter}" Grid.Row="4"/>
+            <Label x:Name="lblLongitudeLimits" Content="Longitude should be between 35.1 and 35.21" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" Foreground="DimGray"/>
+            <Label x:Name="lblLatitudeLimits" Content="Latitude should be between 31.79 and 31.81" Grid.Row="4" VerticalAlignment="Top" Foreground="DimGray" Grid.ColumnSpan="2" Margin="133,47,0,0"/>
+            <Label x:Name="lblEnterLong" Content="Longitude:" Style="{StaticResource lblEnter}" Grid.Column="2" Grid.Row="4" Width="82"/>
+            <TextBox x:Name="txtCustomerLong" Style="{StaticResource txtboxEnter}" Grid.Row="4"  HorizontalAlignment="Center"  Width="100" />
+            <Label x:Name="lblEnterLat" Content="Latitude:" Style="{StaticResource lblEnter}" Grid.Column="2" Grid.Row="4" VerticalAlignment="Bottom" Width="82"/>
+            <TextBox x:Name="txtCustomerLat"  Style="{StaticResource txtboxEnter}" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="100"/>
+
+            <Grid x:Name="AddButtonsGrid" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="btnAdd" Content="Add" Style="{StaticResource btnAddPage}" Grid.Column="0" Click="btnAdd_Click"/>
+                <Button x:Name="btnCancel" Content="Cancel" Style="{StaticResource btnAddPage}" Grid.Column="1" Click="btnCancel_Click"/>
+            </Grid>
+            <Label Content="Insert details of customer you want to add:" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Foreground="Gray" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="48" Width="472"/>
+        </Grid>
+
+
+        <Grid x:Name="ActionsGrid" d:IsHidden="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.2*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="1.6*"/>
+            </Grid.RowDefinitions>
+
+            <Label x:Name="lblIdData" Content="ID:" Style="{StaticResource lblDetails}" Grid.Row="1" Grid.Column="1" />
+            <TextBox x:Name="txtIdData" Text="{Binding Id, Mode=OneWay}" Style="{StaticResource txtboxDetails}" IsReadOnly="True" Grid.Column="2" Grid.Row="1" />
+            <Label x:Name="lblNameData" Content="Name:" Style="{StaticResource lblDetails}" Grid.Row="2" Grid.Column="1" />
+            <TextBox x:Name="txtNameData" Text="{Binding Name, Mode=OneWay}" Style="{StaticResource txtboxDetails}" Grid.Row="2" Grid.Column="2"  BorderThickness="3" />
+            <Label x:Name="lblPhoneData" Content="Phone:"  Style="{StaticResource lblDetails}" Grid.Row="1" Grid.Column="4" />
+            <TextBox x:Name="txtPhoneData" Text="{Binding Phone, Mode=OneWay}" Style="{StaticResource txtboxDetails}" Grid.Column="5" Grid.Row="1" BorderThickness="3"/>
+            <Label x:Name="lblLocationData" Content="Location:" Style="{StaticResource lblDetails}" Grid.Row="2" Grid.Column="4" />
+            <TextBox x:Name="txtLocationData" Text="{Binding Location, Mode=OneWay}" Style="{StaticResource txtboxDetails}" IsReadOnly="True" Height="50" Grid.Column="5" Grid.Row="2" />
+
+            <!--<Label x:Name="lblParcelsThatWereDelivered" Content="Parcels that were delivered:" Width="170" FontWeight="Bold" Grid.Row="3" Grid.ColumnSpan="3" Margin="21,28,62,17" BorderThickness="0.5" Grid.RowSpan="2"/>
+            <TextBox x:Name="txtParcelsThatWereDelivered" Text="{Binding Send,Mode=OneWay}" HorizontalAlignment="Right" IsReadOnly="True" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" Height="130"  Grid.Column="2" Grid.Row="3" Grid.RowSpan="4" Grid.ColumnSpan="2" Margin="0,23,43,0"/>
+
+            <Label x:Name="IblParcelsThatWereReceived" Content="Parcels that were received:" Width="170" FontWeight="Bold" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="3" Margin="153,23,182,23" BorderThickness="0.5" Grid.RowSpan="2"/>
+            <TextBox x:Name="txtParcelsThatWereReceived" Text="{Binding Receive,Mode=OneWay}" HorizontalAlignment="Left" IsReadOnly="True" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" Height="130"  Grid.Column="5" Grid.Row="3" Grid.RowSpan="4" Margin="20,23,0,0" Grid.ColumnSpan="2"/>-->
+
+
+
+
+
+            <!--<Grid Grid.Row="3" Background="#FFF7F7F7" Margin="-230,23,61,55" Grid.RowSpan="4" Grid.ColumnSpan="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="84*"/>
+                    <ColumnDefinition Width="41*"/>
+                </Grid.ColumnDefinitions>
+                <Label Name="lblParcelsReceived" Content="Parcels Received"  Margin="449,196,0,-179" FontWeight="Bold" HorizontalAlignment="Left" FontSize="18" Width="auto" Height="30" Grid.Column="1"/>
+            </Grid>-->
+
+            <Label x:Name="lblParcelsReceived" Content="Parcels that were received:" FontWeight="Bold" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Top" />
+            <Label x:Name="iblParcelsDelivered" Content="Parcels that were delivered:" FontWeight="Bold" Grid.Column="4" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Top" Grid.ColumnSpan="2" />
+
+            <ListView x:Name="ParcelsSentListView" FontSize="10" Cursor="Hand" Grid.Column="4" Grid.Row="4" Grid.ColumnSpan="2" MouseDoubleClick="DeliveredlistView_MouseDoubleClick">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Id" Width="50" DisplayMemberBinding="{Binding Id}"/>
+                        <GridViewColumn Header="Weight" Width="60" DisplayMemberBinding="{Binding Weight}" />
+                        <GridViewColumn Header="Priority" Width="60" DisplayMemberBinding="{Binding Priority}" />
+                        <GridViewColumn Header="Status" Width="60" DisplayMemberBinding="{Binding ParcelStatus}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <ListView x:Name="ParcelsReceivedListView" FontSize="10" Cursor="Hand" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" MouseDoubleClick="ReceivedlistView_MouseDoubleClick">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Id" Width="50" DisplayMemberBinding="{Binding Id}"/>
+                        <GridViewColumn Header="Weight" Width="60" DisplayMemberBinding="{Binding Weight}" />
+                        <GridViewColumn Header="Priority" Width="60" DisplayMemberBinding="{Binding Priority}" />
+                        <GridViewColumn Header="Status" Width="60" DisplayMemberBinding="{Binding ParcelStatus}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <Grid Grid.Row="6" Grid.ColumnSpan="7">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="btnClose" Style="{StaticResource btnAddPage}" Content="Close" Grid.Column="1" Click="btnClose_Click"  />
+                <Button x:Name="btnFinalUpdate" Style="{StaticResource btnAddPage}" Content="Update" Grid.Column="3" Click="btnFinalUpdate_Click" />
+                <Button x:Name="btnDelete" Style="{StaticResource btnAddPage}" Content="Delete" Grid.Column="2" Click="btnDelete_Click" />
+                <Button x:Name="btnNewParcel"  Style="{StaticResource btnAddPage}" Content="New Parcel" Grid.Column="4" Click="btnNewParcel_Click"/>
+            </Grid>
+
+
+
+        </Grid>
+    </Grid>
+</Window>
